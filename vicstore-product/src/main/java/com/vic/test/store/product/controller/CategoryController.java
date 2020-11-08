@@ -1,6 +1,7 @@
 package com.vic.test.store.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -32,14 +33,14 @@ public class CategoryController {
     private CategoryService categoryService;
 
     /**
-     * 列表
+     *  獲取所有3級分類
      */
-    @RequestMapping("/list")
+    @RequestMapping("/list/all")
     //@RequiresPermissions("product:category:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = categoryService.queryPage(params);
+    public R list(){
+        List<CategoryEntity> list = categoryService.listCategoryTree();
 
-        return R.ok().put("page", page);
+        return R.ok().put("categoryTree", list);
     }
 
 

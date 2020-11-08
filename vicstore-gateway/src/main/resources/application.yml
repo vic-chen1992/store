@@ -11,3 +11,20 @@ spring:
           uri: https://www.yahoo.com
           predicates:
             - Query=url,yahoo
+
+
+        - id: product
+          uri: lb://service-pms
+          predicates:
+            - Path=/api/product/**
+          filters:
+            - RewritePath=/api/product/(?<segment>.*),/product/$\{segment}
+
+
+        - id: admin_route
+          uri: lb://renren-fast
+          predicates:
+            - Path=/api/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/renren-fast/$\{segment}
+
