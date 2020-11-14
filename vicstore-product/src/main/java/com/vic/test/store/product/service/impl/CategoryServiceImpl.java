@@ -48,6 +48,14 @@ public class CategoryServiceImpl extends ServiceImpl<CategoryDao, CategoryEntity
         return result;
     }
 
+    @Override
+    public void removeByCatIds(List<Long> asList) {
+        //TODO 判斷是否可以刪除
+        int result = baseMapper.deleteBatchIds(asList);
+        System.out.println("categoryids是否刪除成功:"+result);
+
+    }
+
     private List<CategoryEntity> setCategoryChild(CategoryEntity test, List<CategoryEntity> categoryEntities) {
 
         List<CategoryEntity> result=categoryEntities.stream().filter(entity-> {

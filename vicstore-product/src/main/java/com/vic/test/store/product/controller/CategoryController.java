@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import io.swagger.annotations.Api;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -26,6 +27,7 @@ import com.vic.test.common.utils.R;
  * @email sunlightcs@gmail.com
  * @date 2020-11-01 19:06:57
  */
+@Api("category")
 @RestController
 @RequestMapping("product/category")
 public class CategoryController {
@@ -83,7 +85,7 @@ public class CategoryController {
     @RequestMapping("/delete")
     //@RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
-		categoryService.removeByIds(Arrays.asList(catIds));
+		categoryService.removeByCatIds(Arrays.asList(catIds));
 
         return R.ok();
     }
