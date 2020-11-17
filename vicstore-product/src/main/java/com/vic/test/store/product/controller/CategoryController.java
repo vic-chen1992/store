@@ -78,6 +78,14 @@ public class CategoryController {
 
         return R.ok();
     }
+    //修改多個數據
+    @RequestMapping("/update/sort")
+    //@RequiresPermissions("product:category:update")
+    public R update(@RequestBody CategoryEntity[] categorys){
+        categoryService.updateBatchById(Arrays.asList(categorys));
+
+        return R.ok();
+    }
 
     /**
      * 删除
