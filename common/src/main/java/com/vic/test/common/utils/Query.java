@@ -38,7 +38,7 @@ public class Query<T> {
         if(params.get(Constant.LIMIT) != null){
             limit = Long.parseLong((String)params.get(Constant.LIMIT));
         }
-
+        System.out.println("limit:"+limit);
         //分页对象
         Page<T> page = new Page<T>(curPage, limit);
 

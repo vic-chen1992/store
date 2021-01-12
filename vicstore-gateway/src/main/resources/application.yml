@@ -12,6 +12,15 @@ spring:
           predicates:
             - Query=url,yahoo
 
+        - id: oss
+          uri: lb://thirdparty
+          predicates:
+            - Path=/api/oss/**
+          filters:
+            - RewritePath=/api/(?<segment>.*),/$\{segment}
+
+
+
 
         - id: product
           uri: lb://service-pms

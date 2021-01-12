@@ -18,3 +18,5 @@ buildNumber.properties
 .idea
 
 **/.gitignore
+/common/common.iml
+/renren-fast/Dockerfile

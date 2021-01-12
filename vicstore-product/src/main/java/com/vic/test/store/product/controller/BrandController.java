@@ -2,12 +2,17 @@ package com.vic.test.store.product.controller;
 
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
+import com.vic.test.common.valid.AddGroup;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.cloud.context.config.annotation.RefreshScope;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -19,6 +24,7 @@ import com.vic.test.store.product.service.BrandService;
 import com.vic.test.common.utils.PageUtils;
 import com.vic.test.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -31,6 +37,7 @@ import com.vic.test.common.utils.R;
 @RestController
 @RequestMapping("product/brand")
 @RefreshScope
+
 public class BrandController {
     @Autowired
     private BrandService brandService;
@@ -75,10 +82,29 @@ public class BrandController {
      */
     @RequestMapping("/save")
     //@RequiresPermissions("product:brand:save")
-    public R save(@RequestBody BrandEntity brand){
-		brandService.save(brand);
+    public R save(@RequestBody @Validated({AddGroup.class}) BrandEntity brand/*, BindingResult result*/){
+        //處理jsr303
+//        if(result.hasErrors()){
+//            System.out.println("有錯誤");
+//            List<FieldError> fieldErrors = result.getFieldErrors();
+//            Map map=new HashMap();
+//            fieldErrors.forEach(item->{
+//                String defaultMessage = item.getDefaultMessage();
+//                String field = item.getField();
+//                map.put(field,defaultMessage);
+//            });
+//
+//            return R.error(400,"數據不合法").put("errors",map);
+//        }else{
 
-        return R.ok();
+        //改交由統一異常類處理
+            brandService.save(brand);
+            return R.ok();
+ //       }
+
+
+
+
     }
 
     /**

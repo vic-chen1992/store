@@ -5,11 +5,7 @@ import java.util.Map;
 
 //import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import com.vic.test.store.product.entity.AttrGroupEntity;
 import com.vic.test.store.product.service.AttrGroupService;
@@ -33,11 +29,14 @@ public class AttrGroupController {
 
     /**
      * 列表
+     * 多catelogId參數
      */
-    @RequestMapping("/list")
+    @GetMapping("/list/{catelogId}")
     //@RequiresPermissions("product:attrgroup:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = attrGroupService.queryPage(params);
+    public R list(@RequestParam Map<String, Object> params,@PathVariable Long catelogId){
+        //service新增,帶catelogId參數的方法
+        PageUtils page = attrGroupService.queryPage(params,catelogId);
+
 
         return R.ok().put("page", page);
     }
